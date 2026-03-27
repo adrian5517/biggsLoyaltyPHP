@@ -22,14 +22,7 @@ This project is a Dockerized PHP + PostgreSQL backend for a registration system,
     - `biggsPmsRegistration.sql`
     - PHP source files in `src/`
 
-2. **Configure environment variables:**
-  - Edit `.env`:
-    ```
-    DB_HOST=db
-    DB_NAME=biggspmsregistration
-    DB_USER=blkgrn14
-    DB_PASSWORD=yourpassword
-    ```
+2.
 
 3. **Build and start the containers:**
   ```sh
