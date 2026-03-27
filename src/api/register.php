@@ -76,7 +76,7 @@ try {
         echo json_encode(['error' => 'Tag ID already exists. Please use a different Tag ID.']);
     } else {
         http_response_code(500);
-        echo json_encode(['error' => 'Database error', 'details' => $e->getMessage()]);
+        echo json_encode(['error' => 'A server error occurred. Please try again later.']);
     }
 }
 ?>
