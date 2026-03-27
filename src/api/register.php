@@ -37,8 +37,9 @@ if (!is_array($data['favorite_menu'])) {
 }
 
 //Explicitly cast empty strings or falsy values to strict booleans
-$interested_events = filter_var($data['interested_in_events'] ?? false, FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false';
-$interested_franchise = filter_var($data['interested_in_franchise'] ?? false, FILTER_VALIDATE_BOOLEAN) ? 'true' : 'false';
+
+$interested_events = filter_var($data['interested_in_events'] ?? false, FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
+$interested_franchise = filter_var($data['interested_in_franchise'] ?? false, FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
 
 
 // Insert user and favorite menus
