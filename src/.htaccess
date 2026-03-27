@@ -1,2 +1,4 @@
 RewriteEngine On
+RewriteBase /
+# Allow direct access to API PHP files under /api/
 RewriteRule ^api/(.*)$ api/$1 [L]

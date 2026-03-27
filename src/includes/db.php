@@ -1,9 +1,9 @@
 <?php
 // Use a fallback to ensure it works even if getenv fails during CLI/Docker edge cases
-$host = getenv('DB_HOST') ?: 'db';
-$db   = getenv('DB_NAME') ?: 'biggspmsregistration';
-$user = getenv('DB_USER') ?: 'blkgrn14';
-$pass = getenv('DB_PASSWORD') ?: '0930839737'; 
+$host = getenv('DB_HOST');
+$db   = getenv('DB_NAME') ;
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASSWORD'); 
 
 $dsn = "pgsql:host=$host;port=5432;dbname=$db;";
 
