@@ -94,6 +94,7 @@ See `biggsPmsRegistration.sql` for full schema and seed data.
 
 ## Quick Start
 
+<<<<<<< HEAD
 1. **Clone the repository and ensure you have:**
    - `docker-compose.yml`, `.env`, `biggsPmsRegistration.sql`, and PHP source files in `src/`
 2. **Edit `.env` with your DB credentials.**
@@ -101,6 +102,22 @@ See `biggsPmsRegistration.sql` for full schema and seed data.
    ```sh
    docker-compose up --build
    ```
+=======
+1. **Clone the repository and place your files:**
+  - Ensure you have the following files in your project root:
+    - `docker-compose.yml`
+    - `.env`
+    - `biggsPmsRegistration.sql`
+    - PHP source files in `src/`
+
+2.
+
+3. **Build and start the containers:**
+  ```sh
+  docker-compose up --build
+  ```
+
+>>>>>>> a82c95a27b9874aa390e40a825cdb6338145fd23
 4. **Initialize the database schema:**
    ```sh
    docker-compose exec db psql -U <DB_USER> -d <DB_NAME> -f /biggsPmsRegistration.sql
