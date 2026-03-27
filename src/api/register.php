@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Allow frontend to call this API
+header('Access-Control-Allow-Origin: *'); 
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
@@ -70,7 +70,7 @@ try {
     echo json_encode(['success' => true, 'message' => 'User registered successfully']);
 } catch (PDOException $e) {
     $pdo->rollBack();
-    if ($e->getCode() === '23505') { // Unique violation (duplicate tag_id)
+    if ($e->getCode() == 1062) { // MySQL duplicate entry
         http_response_code(409);
         echo json_encode(['error' => 'Tag ID already exists. Please use a different Tag ID.']);
     } else {

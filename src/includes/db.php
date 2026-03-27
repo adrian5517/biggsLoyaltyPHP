@@ -5,13 +5,13 @@ $db   = getenv('DB_NAME') ;
 $user = getenv('DB_USER');
 $pass = getenv('DB_PASSWORD'); 
 
-$dsn = "pgsql:host=$host;port=5432;dbname=$db;";
-
+$port = getenv('DB_PORT') ?: 3306;
+$dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
 try {
     $pdo = new PDO($dsn, $user, $pass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Always fetch as associative array
-        PDO::ATTR_EMULATE_PREPARES   => false,            // Let PostgreSQL handle types strictly
+        PDO::ATTR_EMULATE_PREPARES   => false,            // Let MySQL handle types strictly
     ]);
 } catch (PDOException $e) {
     http_response_code(500);

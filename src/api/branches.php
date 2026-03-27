@@ -19,12 +19,20 @@ try {
     
     $branches = $stmt->fetchAll();
 
-    // PostgreSQL arrays return as strings like "{image.png,image2.png}".
-    // We need to format them back into clean PHP arrays for our JSON output.
+    // MySQL: images is stored as TEXT (JSON or comma-separated string)
     foreach ($branches as &$branch) {
-        $rawImages = trim($branch['images'], '{}');
-        $branch['images'] = $rawImages ? explode(',', $rawImages) : [];
-        $branch['has_venue_hall'] = (bool) $branch['has_venue_hall']; 
+        if ($branch['images']) {
+            // Try to decode as JSON, fallback to comma-separated
+            $decoded = json_decode($branch['images'], true);
+            if (is_array($decoded)) {
+                $branch['images'] = $decoded;
+            } else {
+                $branch['images'] = array_map('trim', explode(',', $branch['images']));
+            }
+        } else {
+            $branch['images'] = [];
+        }
+        $branch['has_venue_hall'] = (bool) $branch['has_venue_hall'];
     }
 
     echo json_encode(['success' => true, 'data' => $branches]);

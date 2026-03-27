@@ -1,14 +1,14 @@
 
 # Biggs PMS Registration
 
-This project is a Dockerized PHP + PostgreSQL backend for a registration system, including API endpoints and database schema for Biggs PMS.
+This project is a Dockerized PHP + MySQL backend for a registration system, including API endpoints and database schema for Biggs PMS.
 
 ## Features
 - REST API endpoints (PHP, Apache)
 
 # Biggs PMS Registration System
 
-This project is a Dockerized PHP + PostgreSQL backend for Biggs PMS registration. It provides REST API endpoints for user registration, menu and branch lookup, and user statistics.
+This project is a Dockerized PHP + MySQL backend for Biggs PMS registration. It provides REST API endpoints for user registration, menu and branch lookup, and user statistics.
 
 ## What This Code Does
 
@@ -25,7 +25,7 @@ This project is a Dockerized PHP + PostgreSQL backend for Biggs PMS registration
 - **menu**: Menu items
 - **biggs_branches**: Branch/location info
 
-See `biggsPmsRegistration.sql` for full schema and seed data.
+See `biggsPmsRegistration.mysql.sql` for full schema and seed data.
 
 ## API Endpoints (All JSON)
 
@@ -94,39 +94,20 @@ See `biggsPmsRegistration.sql` for full schema and seed data.
 
 ## Quick Start
 
-<<<<<<< HEAD
+
 1. **Clone the repository and ensure you have:**
-   - `docker-compose.yml`, `.env`, `biggsPmsRegistration.sql`, and PHP source files in `src/`
+  - `docker-compose.yml`, `.env`, `biggsPmsRegistration.mysql.sql`, and PHP source files in `src/`
 2. **Edit `.env` with your DB credentials.**
 3. **Build and start containers:**
-   ```sh
-   docker-compose up --build
-   ```
-=======
-1. **Clone the repository and place your files:**
-  - Ensure you have the following files in your project root:
-    - `docker-compose.yml`
-    - `.env`
-    - `biggsPmsRegistration.sql`
-    - PHP source files in `src/`
-
-2.
-
-3. **Build and start the containers:**
   ```sh
   docker-compose up --build
   ```
-
->>>>>>> a82c95a27b9874aa390e40a825cdb6338145fd23
-4. **Initialize the database schema:**
-   ```sh
-   docker-compose exec db psql -U <DB_USER> -d <DB_NAME> -f /biggsPmsRegistration.sql
-   ```
+4. **The MySQL database will be initialized automatically from `biggsPmsRegistration.mysql.sql` on first run.**
 5. **Test the API using Postman, curl, or your frontend.**
 
 ## Troubleshooting
 
-- If you get `relation does not exist`, make sure you loaded the SQL schema after the database container started.
+- If you get `table does not exist`, make sure you loaded the SQL schema after the database container started.
 - Always restart containers after changing `.env` or `docker-compose.yml`.
 - Check logs with `docker-compose logs` for errors.
 
