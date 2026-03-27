@@ -71,13 +71,13 @@ try {
     echo json_encode(['success' => true, 'message' => 'User registered successfully']);
 } catch (PDOException $e) {
     $pdo->rollBack();
-    if ($e->getCode() == 1062) { // MySQL duplicate entry
-        http_response_code(409);
-        echo json_encode(['error' => 'Tag ID already exists. Please use a different Tag ID.']);
-    } else {
-        http_response_code(500);
-        echo json_encode(['error' => 'A server error occurred. Please try again later.']);
-    }
+   if ($e->getCode() == 1062 || $e->getCode() == '23000') {
+    http_response_code(409);
+    echo json_encode(['error' => 'Tag ID already exists. Please use a different Tag ID.']);
+} else {
+    http_response_code(500);
+    echo json_encode(['error' => 'A server error occurred. Please try again later.']);
+}
 }
 ?>
 
