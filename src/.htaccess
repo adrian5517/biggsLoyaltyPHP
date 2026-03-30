@@ -2,3 +2,12 @@ RewriteEngine On
 RewriteBase /
 # Allow direct access to API PHP files under /api/
 RewriteRule ^api/(.*)$ api/$1 [L]
+
+# CORS headers for API endpoints
+<IfModule mod_headers.c>
+	<FilesMatch "\.php$">
+		Header set Access-Control-Allow-Origin "*"
+		Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+		Header set Access-Control-Allow-Headers "Content-Type"
+	</FilesMatch>
+</IfModule>
