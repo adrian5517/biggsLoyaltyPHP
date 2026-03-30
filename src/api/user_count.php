@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once '../includes/db.php';
 
 try {
-    $stmt = $pdo->query('SELECT COUNT(*) AS total FROM users');
+    $stmt = $pdo->query('SELECT COUNT(*) AS total FROM btc_profile');
     $row = $stmt->fetch();
     echo json_encode(['success' => true, 'count' => (int)$row['total']]);
 } catch (PDOException $e) {

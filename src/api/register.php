@@ -55,24 +55,37 @@ $interested_franchise = filter_var($data['interested_in_franchise'] ?? false, FI
 
 // Insert user and favorite menus
 try {
+
     $pdo->beginTransaction();
 
-    
-
-$stmt = $pdo->prepare('
-    INSERT INTO users (tag_id, name, phone_number, birthday, favorite_menu_code, frequented_biggs_location_id, interested_in_events, interested_in_franchise)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-');
-$stmt->execute([
-    $data['tag_id'],
-    $data['name'],
-    $data['phone_number'],
-    $data['birthday'],
-    $data['favorite_menu_code'],
-    $data['frequented_biggs_location_id'],
-    $interested_events,
-    $interested_franchise
-]);
+    // Map API fields to btc_profile columns
+    $stmt = $pdo->prepare('
+        INSERT INTO btc_profile (
+            tag_uid,
+            phone_number,
+            name,
+            birthday,
+            fave_location,
+            fave_item,
+            events_flag,
+            franchising_flag,
+            password,
+            email,
+            created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+    ');
+    $stmt->execute([
+        $data['tag_id'], // tag_uid
+        $data['phone_number'],
+        $data['name'],
+        $data['birthday'],
+        $data['frequented_biggs_location_id'], // fave_location
+        $data['favorite_menu_code'], // fave_item
+        $interested_events, // events_flag
+        $interested_franchise, // franchising_flag
+        '', // password (empty string)
+        $data['email'] ?? null 
+    ]);
 
     $pdo->commit();
     http_response_code(201); // 201 Created
