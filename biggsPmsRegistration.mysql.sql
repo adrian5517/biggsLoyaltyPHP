@@ -48,7 +48,7 @@ INSERT INTO biggs_branches (
 
 CREATE TABLE IF NOT EXISTS menu (
     m_id INT AUTO_INCREMENT PRIMARY KEY,
-    m_code VARCHAR(20) NOT NULL,
+    m_code VARCHAR(20) NOT NULL UNIQUE,
     m_title VARCHAR(255) NOT NULL,
     m_desc VARCHAR(200) NOT NULL,
     m_price VARCHAR(200) NOT NULL,
@@ -136,26 +136,19 @@ INSERT INTO menu (m_id, m_code, m_title, m_desc, m_price, m_creator, date_create
 
 CREATE TABLE IF NOT EXISTS users (
     tag_id VARCHAR(64) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    favorite_menu INT,
+    birthday DATE NOT NULL,
+    favorite_menu_code VARCHAR(20),
     frequented_biggs_location_id INT,
     interested_in_events TINYINT(1) DEFAULT 0,
     interested_in_franchise TINYINT(1) DEFAULT 0,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (favorite_menu) REFERENCES menu(m_id),
+    FOREIGN KEY (favorite_menu_code) REFERENCES menu(m_code),
     FOREIGN KEY (frequented_biggs_location_id) REFERENCES biggs_branches(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_favorite_menu (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_tag_id VARCHAR(64) NOT NULL,
-    menu_id INT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE KEY uq_user_menu (user_tag_id, menu_id),
-    FOREIGN KEY (user_tag_id) REFERENCES users(tag_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (menu_id) REFERENCES menu(m_id) ON UPDATE CASCADE ON DELETE CASCADE
-);
+
 
 CREATE TABLE IF NOT EXISTS store_stats (
     id INT AUTO_INCREMENT PRIMARY KEY,

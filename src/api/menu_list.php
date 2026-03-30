@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once '../includes/db.php';
 
 try {
-    $stmt = $pdo->query('SELECT m_id, m_title FROM menu ORDER BY m_title ASC');
+    $stmt = $pdo->query('SELECT m_code, m_title FROM menu ORDER BY m_title ASC');
     $menu = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($menu);
 } catch (PDOException $e) {
